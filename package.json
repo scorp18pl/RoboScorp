@@ -1,0 +1,26 @@
+{
+  "name": "roboscorp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "string-similarity-js": "^2.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.0.2",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}
