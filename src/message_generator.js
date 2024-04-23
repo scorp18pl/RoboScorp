@@ -184,14 +184,6 @@ class MessageGenerator {
     return null;
   }
 
-  static getWelcomeMessage(memberId) {
-    return `<@${memberId}> ${ReplyStorage.getRandomReply("Welcome")}`;
-  }
-
-  static getFarewellMessage(memberId) {
-    return `<@${memberId}> ${ReplyStorage.getRandomReply("Farewell")}`;
-  }
-
   static #selectCandidate(candidates) {
     let weightSum = 0.0;
     for (const [, weight] of candidates) {
