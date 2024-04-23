@@ -3,6 +3,7 @@ const { McServer } = require("./mc_server");
 const { MessageGenerator } = require("./message_generator");
 
 class RoboScorp {
+  static #greetingsChannelId = "1144687730907947148";
   static #mcServer = new McServer();
   #client;
   static #seenMembers = [];
@@ -26,12 +27,9 @@ class RoboScorp {
   }
 
   #onReady(client) {
-    const channelId = "938157480578523186";
-    console.log(`🤖 ${client.user.tag} is alive... 🤖`);
-
     client.channels
-      .fetch(channelId)
-      .then((channel) => RoboScorp.#mcServer.start(channel))
+      .fetch(RoboScorp.#greetingsChannelId)
+      .then((channel) => {channel.send(`🤖 Powstaję z żywych... 🤖`);})
       .catch(console.error);
   }
 
@@ -57,7 +55,6 @@ class RoboScorp {
   }
 
   static #greetMember(client, member, hasLeft) {
-    const greetingsChannelId = "1144687730907947148";
 
     let message = null;
     if (hasLeft) {
@@ -72,7 +69,7 @@ class RoboScorp {
     }
 
     client.channels
-      .fetch(greetingsChannelId)
+      .fetch(RoboScorp.#greetingsChannelId)
       .then((channel) => {
         channel.send(message);
       })

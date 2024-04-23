@@ -1,6 +1,8 @@
 const { stringSimilarity } = require("string-similarity-js");
 const path = require("path");
 
+const DataPath = "../RoboScorpData";
+
 class ReplyTriggers {
   constructor(replyKey, triggerMessageList, isExact = false) {
     this.key = replyKey;
@@ -43,7 +45,7 @@ class ReplyStorage {
   }
 
   static #constructReplies() {
-    const repliesFilePath =  path.join(__dirname, "../data/replies/replies.json");
+    const repliesFilePath =  path.join(__dirname, `${DataPath}/replies/replies.json`);
     return require(repliesFilePath);
   }
 }
@@ -147,7 +149,7 @@ class SentanceBasedReplyStrategy extends ReplyStrategy {
   }
 
   static #constructTriggers() {
-    const triggersFilePath = path.join(__dirname, "../data/triggers/triggers.json");
+    const triggersFilePath = path.join(__dirname, `${DataPath}/triggers/triggers.json`);
     const triggers = require(triggersFilePath);
 
     const triggerList = []; 
