@@ -90,7 +90,8 @@ class CapsLockReplyStrategy extends ReplyStrategy {
 
     let i = string.length;
     while (--i) {
-      if (string.charAt(i).toUpperCase() === string.charAt(i)) {
+      const c = string.charAt(i);
+      if ((c.toUpperCase() === c) && (c.toLowerCase() !== c)) {
         ++upper;
       }
     }
