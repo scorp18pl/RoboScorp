@@ -1,4 +1,4 @@
-const { Client, IntentsBitField } = require("discord.js");
+const { Client, GatewayIntentBits } = require("discord.js");
 const { MessageGenerator } = require("./message_generator");
 
 class RoboScorp {
@@ -8,11 +8,11 @@ class RoboScorp {
   constructor() {
     this.#client = new Client({
       intents: [
-        IntentsBitField.Flags.Guilds,
-        IntentsBitField.Flags.GuildMembers,
-        IntentsBitField.Flags.GuildMessages,
-        IntentsBitField.Flags.MessageContent,
-        IntentsBitField.Flags.GuildVoiceStates,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildVoiceStates,
       ],
     });
 
