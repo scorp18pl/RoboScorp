@@ -1,10 +1,8 @@
 const { Client, IntentsBitField } = require("discord.js");
-const { McServer } = require("./mc_server");
 const { MessageGenerator } = require("./message_generator");
 
 class RoboScorp {
   static #greetingsChannelId = "1144687730907947148";
-  static #mcServer = new McServer();
   #client;
 
   constructor() {
