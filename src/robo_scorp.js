@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, Events } = require("discord.js");
-const { MessageGenerator } = require("./message_generator");
+const { MessageGenerator } = require("./message_generation/message_generator");
 
 class RoboScorp {
   static #greetingsChannelId = "1144687730907947148";
