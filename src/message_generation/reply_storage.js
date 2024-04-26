@@ -1,6 +1,6 @@
-const path = require("path");
+const path = require('path');
 
-const DataPath = "../RoboScorpData";
+const DataPath = '../RoboScorpData';
 
 class ReplyStorage {
   static #replies = ReplyStorage.#constructReplies();
@@ -26,7 +26,10 @@ class ReplyStorage {
   }
 
   static #constructReplies() {
-    const repliesFilePath = path.join(__dirname, `${DataPath}/replies/replies.json`);
+    const repliesFilePath = path.join(
+      __dirname,
+      `${DataPath}/replies/replies.json`,
+    );
     return require(repliesFilePath);
   }
 }

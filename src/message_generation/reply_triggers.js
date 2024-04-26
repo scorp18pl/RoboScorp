@@ -7,10 +7,10 @@ class ReplyTriggers {
 
   calculateScore(string, scoreStrategy) {
     let best = 0;
-    for (const trigger of this.triggers) {
+    this.triggers.array.forEach((trigger) => {
       const current = scoreStrategy.getScore(trigger, string);
       best = current > best ? current : best;
-    }
+    });
 
     return best;
   }
