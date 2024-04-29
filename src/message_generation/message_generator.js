@@ -2,12 +2,12 @@ const {
   NightTimeReplyStrategy,
   CapsLockReplyStrategy,
   SentanceBasedReplyStrategy,
-} = require('./reply_strategies');
+} = require('./reply_strategies/reply_strategies');
 
 const {
   SimilarityScoreStrategy,
   WordScoreStrategy,
-} = require('./score_strategies');
+} = require('./score_strategies/score_strategies');
 
 class MessageGenerator {
   static #replyStrategies = [

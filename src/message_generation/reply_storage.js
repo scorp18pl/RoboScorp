@@ -1,6 +1,6 @@
 const path = require('path');
 
-const DataPath = '../RoboScorpData';
+const dataPath = path.join(__dirname, '/../../RoboScorpData');
 
 class ReplyStorage {
   static #replies = ReplyStorage.#constructReplies();
@@ -26,12 +26,9 @@ class ReplyStorage {
   }
 
   static #constructReplies() {
-    const repliesFilePath = path.join(
-      __dirname,
-      `${DataPath}/replies/replies.json`,
-    );
+    const repliesFilePath = path.join(dataPath, '/replies/replies.json');
     return require(repliesFilePath);
   }
 }
 
-module.exports = { DataPath, ReplyStorage };
+module.exports = { ReplyStorage, dataPath };

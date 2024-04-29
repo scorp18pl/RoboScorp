@@ -1,6 +1,6 @@
 const path = require('path');
-const { ReplyStorage, DataPath } = require('./reply_storage');
-const ReplyTriggers = require('./reply_triggers');
+const { ReplyStorage, dataPath } = require('../reply_storage');
+const { ReplyTriggers } = require('../reply_triggers');
 const { ReplyStrategy } = require('./reply_strategy');
 
 class SentanceBasedReplyStrategy extends ReplyStrategy {
@@ -34,10 +34,7 @@ class SentanceBasedReplyStrategy extends ReplyStrategy {
   }
 
   static #constructTriggers() {
-    const triggersFilePath = path.join(
-      __dirname,
-      `${DataPath}/triggers/triggers.json`,
-    );
+    const triggersFilePath = path.join(dataPath, '/triggers/triggers.json');
     const triggers = require(triggersFilePath);
 
     const triggerList = [];

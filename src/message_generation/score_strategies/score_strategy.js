@@ -1,5 +1,5 @@
 class ScoreStrategy {
-  getScore(trigger, string) {
+  getScore(_trigger, _string) {
     return 0;
   }
 }

@@ -16,4 +16,4 @@ class ReplyTriggers {
   }
 }
 
-export default { ReplyTriggers };
+module.exports = { ReplyTriggers };

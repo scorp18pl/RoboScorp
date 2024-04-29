@@ -1,5 +1,5 @@
 class ReplyStrategy {
-  selectReply(message) {
+  selectReply(_message) {
     return null;
   }
 }

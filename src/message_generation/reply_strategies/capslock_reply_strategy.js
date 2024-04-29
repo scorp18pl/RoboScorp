@@ -1,4 +1,5 @@
 const { ReplyStrategy } = require('./reply_strategy');
+const { ReplyStorage } = require('../reply_storage');
 
 class CapsLockReplyStrategy extends ReplyStrategy {
   static #threshHold = 0.8;
