@@ -1,8 +1,8 @@
-const { Client, GatewayIntentBits, Events } = require("discord.js");
-const { MessageGenerator } = require("./message_generation/message_generator");
+const { Client, GatewayIntentBits, Events } = require('discord.js');
+const { MessageGenerator } = require('./message_generation/message_generator');
 
 class RoboScorp {
-  static #greetingsChannelId = "1144687730907947148";
+  static #greetingsChannelId = '1144687730907947148';
   #client;
 
   constructor() {
@@ -16,7 +16,7 @@ class RoboScorp {
       ],
     });
 
-    console.log("Starting the client...");
+    console.log('Starting the client...');
     this.#createClient();
   }
 
@@ -25,10 +25,12 @@ class RoboScorp {
   }
 
   #onReady(client) {
-    console.log("The client started succesfully.");
+    console.log('The client started succesfully.');
     client.channels
       .fetch(RoboScorp.#greetingsChannelId)
-      .then((channel) => { channel.send(`🤖 Powstaję z żywych... 🤖`); })
+      .then((channel) => {
+        channel.send(`🤖 Powstaję z żywych... 🤖`);
+      })
       .catch(console.error);
   }
 
@@ -44,7 +46,7 @@ class RoboScorp {
   }
 
   #onError(error) {
-    console.error("A following discord.js error occured.", error);
+    console.error('A following discord.js error occured.', error);
   }
 
   #createClient() {
