@@ -13,6 +13,10 @@ class SentanceBasedReplyStrategy extends ReplyStrategy {
   }
 
   selectReply(message) {
+    if (!message.content) {
+      return null;
+    }
+
     let bestScore = 0;
     let bestReplyKey = '';
     for (const replyTrigger of SentanceBasedReplyStrategy.#replyTriggers) {

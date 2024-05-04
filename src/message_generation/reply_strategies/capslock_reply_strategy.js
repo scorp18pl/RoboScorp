@@ -6,6 +6,10 @@ class CapsLockReplyStrategy extends ReplyStrategy {
 
   selectReply(message) {
     const string = message.content;
+    if (!string) {
+      return null;
+    }
+
     let upper = 0;
 
     let i = string.length;

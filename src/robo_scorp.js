@@ -40,9 +40,13 @@ class RoboScorp {
       return;
     }
 
-    const reply = MessageGenerator.selectReply(message);
-    if (reply) {
-      message.reply(reply).catch(console.error);
+    try {
+      const reply = MessageGenerator.selectReply(message);
+      if (reply) {
+        message.reply(reply).catch(console.error);
+      }
+    } catch (error) {
+      console.error('An exception occured while generating a message.', error);
     }
   }
 
