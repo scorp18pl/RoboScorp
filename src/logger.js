@@ -3,7 +3,6 @@ const winston = require('winston');
 class Logger {
   Level;
   Label;
-  static static;
 
   #transports;
   #logger;
