@@ -2,3 +2,4 @@ RoboScorpData/
 .env
 node_modules/
 *.log
+ecosystem.config.js
