@@ -1,13 +1,7 @@
-const {
-  NightTimeReplyStrategy,
-  CapsLockReplyStrategy,
-  SentanceBasedReplyStrategy,
-} = require('./reply_strategies/reply_strategies');
+const logger = require('../logger');
+const { NightTimeReplyStrategy, CapsLockReplyStrategy, SentanceBasedReplyStrategy } = require('./reply_strategies/reply_strategies');
 
-const {
-  SimilarityScoreStrategy,
-  WordScoreStrategy,
-} = require('./score_strategies/score_strategies');
+const { SimilarityScoreStrategy, WordScoreStrategy } = require('./score_strategies/score_strategies');
 
 class MessageGenerator {
   static #replyStrategies = [
@@ -47,7 +41,7 @@ class MessageGenerator {
       target -= weight;
     }
 
-    console.assert(false, 'The loop was executed badly. Programmer error.');
+    logger.crit('The loop was executed badly. Programmer error.', 'MessageGenerator');
     return null;
   }
 }

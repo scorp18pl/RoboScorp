@@ -7,9 +7,7 @@ class NightTimeReplyStrategy extends ReplyStrategy {
 
   selectReply(message) {
     const hours = message.createdAt.getHours();
-    const isNightTime =
-      hours < NightTimeReplyStrategy.#nightEnd ||
-      hours > NightTimeReplyStrategy.#nightBegin;
+    const isNightTime = hours < NightTimeReplyStrategy.#nightEnd || hours > NightTimeReplyStrategy.#nightBegin;
     if (isNightTime) {
       return ReplyStorage.getRandomReply('MeanSleep');
     }

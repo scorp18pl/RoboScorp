@@ -1,4 +1,5 @@
 const path = require('path');
+const logger = require('../logger');
 
 const dataPath = path.join(__dirname, '/../../RoboScorpData');
 
@@ -17,7 +18,7 @@ class ReplyStorage {
   static getRandomReply(key) {
     const replies = this.getReplySet(key);
     if (!replies) {
-      console.assert(false, `The key "${key}" is not present in the storage.`);
+      logger.error(`The key "${key}" is not present in the storage.`, 'ReplyStorage');
       return null;
     }
 

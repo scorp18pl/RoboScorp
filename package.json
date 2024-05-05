@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "debug": "node src/index.js --debug"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +14,9 @@
     "child_process": "^1.0.2",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
-    "string-similarity-js": "^2.1.4"
+    "string-similarity-js": "^2.1.4",
+    "winston": "^3.13.0",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.0.2",

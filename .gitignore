@@ -1,4 +1,4 @@
 RoboScorpData/
 .env
 node_modules/
-
+*.log

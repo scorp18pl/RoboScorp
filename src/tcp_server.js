@@ -1,9 +1,11 @@
 const net = require('net');
+const logger = require('./logger');
 
 class TcpServer {
   #port;
   #server;
   #onMessageFunction;
+  static LogLabel = 'TCP Server';
 
   constructor(port, onMessageFunction) {
     this.#port = port;
@@ -11,7 +13,7 @@ class TcpServer {
 
     this.#server = net.createServer(this.#onClientConnection.bind(this));
     this.#server.listen(this.#port, () => {
-      console.log(`TCP Server: Server started on port ${port}.`);
+      logger.debug(`Server started on port ${port}.`, TcpServer.LogLabel);
     });
   }
 
@@ -19,16 +21,16 @@ class TcpServer {
     sock.on('data', (data) => {
       const dataString = data.toString('utf8');
       if (dataString.length > 0) {
+        logger.debug(`Received message: ${dataString}`, TcpServer.LogLabel);
         this.#onMessageFunction(dataString);
-      } else {
-        console.log('TCP Server: Received an empty string.');
+        return;
       }
+
+      logger.debug('Received an empty message.', TcpServer.LogLabel);
     });
 
     sock.on('error', (error) => {
-      console.error(
-        `TCP Server: ${sock.remoteAddress}:${sock.remotePort} Connection Error ${error}.`,
-      );
+      logger.error(`${sock.remoteAddress}:${sock.remotePort} Connection Error ${error}.`, TcpServer.LogLabel);
     });
   };
 }

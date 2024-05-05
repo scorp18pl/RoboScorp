@@ -20,10 +20,7 @@ class SentanceBasedReplyStrategy extends ReplyStrategy {
     let bestScore = 0;
     let bestReplyKey = '';
     for (const replyTrigger of SentanceBasedReplyStrategy.#replyTriggers) {
-      const newScore = replyTrigger.calculateScore(
-        message.content,
-        this.scoreStrategy,
-      );
+      const newScore = replyTrigger.calculateScore(message.content, this.scoreStrategy);
       if (newScore > bestScore) {
         bestScore = newScore;
         bestReplyKey = replyTrigger.key;
