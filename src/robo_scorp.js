@@ -100,11 +100,13 @@ class RoboScorp {
 
     const previousMessages = await channel.messages.fetch({ limit: 100 });
     const ownMessages = previousMessages.filter((message) => message.author.id === this.#discordClient.user.id);
-    await Promise.all(ownMessages.map((message) => message.delete()));
+    await Promise.allSettled(ownMessages.map((message) => message.delete()));
 
     const coordsMessages = buildCoordsMessages(csvMessage);
     for (const messageContent of coordsMessages) {
-      await channel.send(messageContent);
+      await channel.send(messageContent).catch((err) => {
+        logger.error(`Failed to send coords message (${messageContent.length} chars): ${err}`, RoboScorp.LogLabel.Discord);
+      });
     }
   }
 }
