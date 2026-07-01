@@ -96,6 +96,7 @@ class RoboScorp {
   }
 
   async #updateCoordsChannel(csvMessage) {
+    logger.info(csvMessage);
     const channel = await this.#discordClient.channels.fetch(process.env.MINECRAFT_COORDS_CHANNEL_ID);
 
     const previousMessages = await channel.messages.fetch({ limit: 100 });
@@ -103,6 +104,7 @@ class RoboScorp {
     await Promise.allSettled(ownMessages.map((message) => message.delete()));
 
     const coordsMessages = buildCoordsMessages(csvMessage);
+    logger.info(coordsMessages);
     for (const messageContent of coordsMessages) {
       await channel.send(messageContent).catch((err) => {
         logger.error(`Failed to send coords message (${messageContent.length} chars): ${err}`, RoboScorp.LogLabel.Discord);
