@@ -15,10 +15,12 @@ function getDateString() {
 
 function parseWaypointsCsv(csv) {
   const [, ...rows] = csv.split('\n').filter((line) => line.length > 0);
-  return rows.map((row) => {
-    const [owner, name, world, x, y, z] = row.split(',');
-    return { owner, name, world, x, y, z };
-  });
+  return rows
+    .filter((row) => row.split(',').length >= 6)
+    .map((row) => {
+      const [owner, name, world, x, y, z] = row.split(',');
+      return { owner, name, world, x, y, z };
+    });
 }
 
 // Mirrors the table's previous merged-cell look: blank out an Owner/World
