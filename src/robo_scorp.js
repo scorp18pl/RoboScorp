@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits, Events } = require('discord.js');
 const { MessageGenerator } = require('./message_generation/message_generator');
 const { TcpServer } = require('./tcp_server');
+const { buildCoordsMessages } = require('./minecraft_coords_table');
 const logger = require('./logger');
 
 class RoboScorp {
@@ -89,20 +90,26 @@ class RoboScorp {
   }
 
   #createTcpServer() {
-    this.#tcpServer = new TcpServer(process.env.TCP_CONNECTION_PORT, (tcpMessage) => {
-      this.#discordClient.channels
-        .fetch(process.env.MINECRAFT_COORDS_CHANNEL_ID)
-        .then((channel) => {
-          channel.messages
-            .fetch(process.env.MINECRAFT_COORDS_MESSAGE_ID)
-            .then((discordMessage) => {
-              const codeblock = '```\n';
-              discordMessage.edit(codeblock + tcpMessage + codeblock);
-            })
-            .catch(logger.error, RoboScorp.LogLabel.Discord);
-        })
-        .catch(logger.error, RoboScorp.LogLabel.Discord);
+    this.#tcpServer = new TcpServer(process.env.TCP_CONNECTION_PORT, (csvMessage) => {
+      this.#updateCoordsChannel(csvMessage).catch((err) => logger.error(err, RoboScorp.LogLabel.Discord));
     });
+  }
+
+  async #updateCoordsChannel(csvMessage) {
+    logger.info(csvMessage);
+    const channel = await this.#discordClient.channels.fetch(process.env.MINECRAFT_COORDS_CHANNEL_ID);
+
+    const previousMessages = await channel.messages.fetch({ limit: 100 });
+    const ownMessages = previousMessages.filter((message) => message.author.id === this.#discordClient.user.id);
+    await Promise.allSettled(ownMessages.map((message) => message.delete()));
+
+    const coordsMessages = buildCoordsMessages(csvMessage);
+    logger.info(coordsMessages);
+    for (const messageContent of coordsMessages) {
+      await channel.send(messageContent).catch((err) => {
+        logger.error(`Failed to send coords message (${messageContent.length} chars): ${err}`, RoboScorp.LogLabel.Discord);
+      });
+    }
   }
 }
 

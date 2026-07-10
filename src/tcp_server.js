@@ -18,8 +18,14 @@ class TcpServer {
   }
 
   #onClientConnection = (sock) => {
+    const chunks = [];
+
     sock.on('data', (data) => {
-      const dataString = data.toString('utf8');
+      chunks.push(data);
+    });
+
+    sock.on('end', () => {
+      const dataString = Buffer.concat(chunks).toString('utf8');
       if (dataString.length > 0) {
         logger.debug(`Received message: ${dataString}`, TcpServer.LogLabel);
         this.#onMessageFunction(dataString);
